@@ -40,7 +40,7 @@ body {
     height: 3rem;
     box-sizing: border-box;
     backdrop-filter: blur(10px);
-    width: clamp(200px, 50%, 1200px);
+    width: clamp(300px, 50%, 1200px);
 }
 
 #message-input {
