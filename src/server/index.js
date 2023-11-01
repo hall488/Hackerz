@@ -1,7 +1,7 @@
 require("dotenv").config();
 const passport = require("passport");
 const express = require("express");
-const { createServer } = require("node:http");
+const { createServer } = require("http");
 const { Server } = require("socket.io");
 const mongoose = require("mongoose");
 const path = require("path");
