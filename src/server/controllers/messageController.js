@@ -5,9 +5,6 @@ exports.messages = async () => {
   return allMessages;
 };
 
-// exports.messages = return new Promise((resolve, reject) => {})
-
-// Handle Genre create on POST.
 exports.sendMessage = async ({ message, user, date }) => {
   const newMessage = new Message({
     message: message,

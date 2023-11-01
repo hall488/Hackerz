@@ -9,7 +9,6 @@ router.post("/signup", async (req, res, next) => {
     "signup",
     { session: false },
     async (err, user, info) => {
-      console.log(err, user, info);
       if (!user) {
         return res.json(info);
       }

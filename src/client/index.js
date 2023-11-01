@@ -31,7 +31,6 @@ if (token != null && token != "null") {
       })
   ).then(async (res) => {
     let json = await res.json();
-    console.log(json);
     username = json.user.username;
     handleLoginDOM();
   });
@@ -84,7 +83,6 @@ form.on("submit", (e) => {
 });
 
 const loadMsg = ({ user, date, message }) => {
-  console.log(date);
   const item = document.createElement("li");
   const _user = document.createElement("div");
   const _date = document.createElement("div");
@@ -120,12 +118,6 @@ $(".log-in").on("submit", async (e) => {
       token = json.token;
       localStorage.setItem("token", token);
       window.location.reload();
-      // username = json.username;
-
-      // socket.emit("auth", { token: token });
-
-      // toggleLogIn();
-      // handleLoginDOM();
     })
     .catch(() => {
       $(".invalid").addClass("show");
@@ -167,10 +159,6 @@ $(".sign-up").on("keypress", () => {
   $(".bad-signup").text("");
 });
 
-$(".sign-up").on("keypress", () => {
-  $(".bad-signup").text("");
-});
-
 $(".fbi-wrapper > input").on("change", () => {
   $(".bad-signup").text("");
 });
@@ -188,6 +176,5 @@ socket.on("chat message", loadMsg);
 socket.on("clear", clearBoard);
 
 socket.on("first", () => {
-  console.log(token);
   socket.emit("auth", { token: token });
 });

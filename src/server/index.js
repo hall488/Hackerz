@@ -7,7 +7,6 @@ const mongoose = require("mongoose");
 const path = require("path");
 const message_controller = require("./controllers/messageController");
 const bodyParser = require("body-parser");
-const JWTstrategy = require("passport-jwt").Strategy;
 const jwt = require("jsonwebtoken");
 const { DateTime } = require("luxon");
 
@@ -41,7 +40,7 @@ app.use("/", routes);
 
 app.use(express.static(path.resolve("dist")));
 
-String.prototype.shuffle = function () {
+String.prototype.blackout = function () {
   var a = this.split("");
   a = a.map((s) => {
     if (s == " ") {
@@ -52,41 +51,51 @@ String.prototype.shuffle = function () {
   return a.join("");
 };
 
+const generateMessage = (message, user) => {
+  let msg = {
+    message: message,
+    user: user,
+    date: new Date(),
+  };
+  return msg;
+};
+
+const msgBlackout = ({ user, message, date }) => {
+  return {
+    user: user.blackout(),
+    message: message.blackout(),
+    date: date,
+  };
+};
+
+const msgFormatDate = ({ user, message, date }) => {
+  return {
+    user: user,
+    message: message,
+    date: DateTime.fromJSDate(msg.date).toLocaleString(DateTime.DATETIME_FULL),
+  };
+};
+
 io.on("connection", async (socket) => {
   let old_messages = await message_controller.messages();
   io.to(socket.id).emit("first");
   io.to(socket.id).emit("clear");
 
-  io.sockets.adapter.sids;
-
   socket.on("chat message", async (string) => {
     if (!auth_sockets.includes(socket.id)) {
       return;
     }
-    let msg = {
-      message: string,
-      user: auth_usernames[auth_sockets.indexOf(socket.id)],
-      date: new Date(),
-    };
+    let msg = generateMessage(
+      string,
+      auth_usernames[auth_sockets.indexOf(socket.id)]
+    );
+
     await message_controller.sendMessage(msg);
 
     io.sockets.adapter.sids.forEach((value, id) => {
       if (auth_sockets.includes(id))
-        io.to(id).emit("chat message", {
-          date: DateTime.fromJSDate(msg.date).toLocaleString(
-            DateTime.DATETIME_FULL
-          ),
-          message: msg.message,
-          user: msg.user,
-        });
-      else
-        io.to(id).emit("chat message", {
-          date: DateTime.fromJSDate(msg.date).toLocaleString(
-            DateTime.DATETIME_FULL
-          ),
-          message: msg.message.shuffle(),
-          user: msg.user.shuffle(),
-        });
+        io.to(id).emit("chat message", msgFormatDate(msg));
+      else io.to(id).emit("chat message", msgFormatDate(msgBlackout(msg)));
     });
   });
 
@@ -102,27 +111,14 @@ io.on("connection", async (socket) => {
 
     old_messages.forEach((msg) => {
       if (auth_sockets.includes(socket.id)) {
-        io.to(socket.id).emit("chat message", {
-          date: DateTime.fromJSDate(msg.date).toLocaleString(
-            DateTime.DATETIME_FULL
-          ),
-          message: msg.message,
-          user: msg.user,
-        });
+        io.to(socket.id).emit("chat message", msgFormatDate(msg));
       } else {
-        io.to(socket.id).emit("chat message", {
-          date: DateTime.fromJSDate(msg.date).toLocaleString(
-            DateTime.DATETIME_FULL
-          ),
-          message: msg.message.shuffle(),
-          user: msg.user.shuffle(),
-        });
+        io.to(socket.id).emit("chat message", msgFormatDate(msgBlackout(msg)));
       }
     });
   });
 
   socket.on("disconnect", () => {
-    console.log("disconnect " + socket.id);
     if (auth_sockets.includes(socket.id)) {
       auth_sockets.splice(auth_sockets.indexOf(socket.id), 1);
       auth_usernames.splice(auth_sockets.indexOf(socket.id), 1);
