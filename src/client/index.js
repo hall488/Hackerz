@@ -19,7 +19,7 @@ let username = "";
 
 let token = localStorage.getItem("token");
 
-const socket = io.connect("localhost:8080", {
+const socket = io({
   transports: ["websocket"],
 });
 
