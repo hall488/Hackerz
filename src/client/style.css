@@ -82,7 +82,7 @@ body {
     margin: 0;
     padding: 0;
     overflow: auto;
-    width: clamp(200px, 50%, 1200px);
+    width: clamp(300px, 50%, 1200px);
     overflow-wrap: break-word;
 }
 
