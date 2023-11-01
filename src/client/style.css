@@ -1,0 +1,231 @@
+:root {
+    --primary: #2b882b;
+    --secondary: #1b1a1a;
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--secondary);
+    color: var(--primary);
+}
+
+.content {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.header {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    width: 100vw;
+}
+
+.header>.title {
+    margin-right: auto;
+    font-size: 24px;
+    padding: 8px;
+}
+
+#message-form {
+    flex: 0;
+    margin-top: auto;
+    background: rgba(0, 0, 0, 0.15);
+    padding: 0.25rem;
+    display: flex;
+    height: 3rem;
+    box-sizing: border-box;
+    backdrop-filter: blur(10px);
+    width: clamp(200px, 50%, 1200px);
+}
+
+#message-input {
+    border: none;
+    padding: 0 1rem;
+    flex-grow: 1;
+    border-radius: 2rem;
+    margin: 0.25rem;
+    font-size: 16px;
+    min-width: 10px;
+    background-color: var(--secondary);
+    color: var(--primary)
+}
+
+#message-input:focus {
+    outline: none;
+}
+
+#message-form>button,
+.inner>button {
+    background: var(--primary);
+    border: 1px solid transparent;
+    padding: .5rem 1rem;
+    margin: 0.25rem;
+    border-radius: 3px;
+    outline: none;
+    color: var(--secondary);
+}
+
+#message-form>button:hover,
+.inner>button:hover {
+    background: var(--secondary);
+    color: var(--primary);
+    border: 1px solid var(--primary);
+}
+
+#messages {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+    width: clamp(200px, 50%, 1200px);
+    overflow-wrap: break-word;
+}
+
+#messages>li {
+    padding: 0.5rem 1rem;
+}
+
+#messages>li:nth-child(odd) {
+    background: #0f0f0f;
+}
+
+.header-btn {
+    background: var(--primary);
+    border: 1px solid transparent;
+    padding: 0 1rem;
+    margin: 0.25rem;
+    border-radius: 3px;
+    outline: none;
+    color: var(--secondary);
+    padding: 0.5rem 1rem;
+}
+
+.header-btn:hover {
+    background: var(--secondary);
+    color: var(--primary);
+    border: 1px solid var(--primary);
+}
+
+.log-in,
+.sign-up {
+    z-index: 2;
+    display: none;
+    position: absolute;
+    flex-direction: column;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid var(--primary);
+    border-radius: 10px;
+    overflow: hidden;
+    background: linear-gradient(180deg, var(--primary) 24px, var(--secondary) 0%);
+    box-sizing: border-box;
+}
+
+
+.blurOpac {
+    opacity: 50%;
+    filter: blur(3px);
+    pointer-events: none;
+}
+
+
+.log-in>.tab,
+.sign-up>.tab {
+    height: 24px;
+    display: flex;
+    align-items: center;
+}
+
+.log-in-x,
+.sign-up-x {
+    margin-left: auto;
+    color: red;
+    margin-right: 5px;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fa-xmark:hover {
+    color: rgb(148, 54, 54);
+}
+
+.log-in>.inner,
+.sign-up>.inner {
+    padding: 16px;
+    display: flex;
+    gap: 8px;
+    flex-direction: column;
+}
+
+.inner>input {
+    border: 1px solid var(--primary);
+}
+
+.log-out-btn,
+.welcome {
+    display: none;
+}
+
+.logged-in.log-in-btn,
+.logged-in.sign-up-btn {
+    display: none;
+}
+
+.logged-in.log-out-btn,
+.logged-in.welcome {
+    display: flex;
+}
+
+.invalid {
+    color: red;
+    display: none;
+    justify-content: center;
+}
+
+.show {
+    display: flex;
+}
+
+.bad-signup {
+    color: red;
+    text-align: center;
+}
+
+li>.date {
+    border-top: 1px solid var(--primary);
+    border-bottom: 1px solid var(--primary);
+}
+
+#messages>li>div {
+    padding: 8px;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 1px grey;
+    border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #094212;
+}

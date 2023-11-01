@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Socket.IO chat</title>
+  </head>
+  <body>
+    <div class="content">
+      <div class="header">
+        <div class="title">Hackerz</div>
+        <div class="welcome"></div>
+        <button class="header-btn log-out-btn">Log Out</button>
+        <button class="header-btn log-in-btn">Log In</button>
+        <button class="header-btn sign-up-btn">Sign Up</button>
+      </div>
+      <ul id="messages"></ul>
+      <form id="message-form" action="">
+        <input id="message-input" autocomplete="off" /><button>Send</button>
+      </form>
+    </div>
+    <form class="log-in">
+      <div class="tab">
+        <div class="log-in-x"><i class="fa-solid fa-xmark"></i></div>
+      </div>
+      <div class="inner">
+        <label for="username">Username:</label>
+        <input type="text" name="username" />
+        <label for="password">Password:</label>
+        <input type="password" name="password" />
+        <div class="invalid">Invalid Credentials</div>
+        <button>Log In</button>
+      </div>
+    </form>
+    <form class="sign-up">
+      <div class="tab">
+        <div class="sign-up-x"><i class="fa-solid fa-xmark"></i></div>
+      </div>
+      <div class="inner">
+        <label for="username">Username:</label>
+        <input type="text" name="username" required />
+        <label for="password">Password:</label>
+        <input type="password" name="password" required />
+        <label for="confirm-password">Confirm Password:</label>
+        <input type="password" name="confirm-password" required />
+        <div class="fbi-wrapper">
+          <input type="checkbox" name="notFBI" />
+          <label for="notFBI"> I am not an FBI Agent</label>
+        </div>
+        <div class="bad-signup"></div>
+        <button type="submit">Sign Up</button>
+      </div>
+    </form>
+  </body>
+</html>
