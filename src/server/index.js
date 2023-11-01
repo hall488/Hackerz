@@ -72,7 +72,7 @@ const msgFormatDate = ({ user, message, date }) => {
   return {
     user: user,
     message: message,
-    date: DateTime.fromJSDate(msg.date).toLocaleString(DateTime.DATETIME_FULL),
+    date: DateTime.fromJSDate(date).toLocaleString(DateTime.DATETIME_FULL),
   };
 };
 
